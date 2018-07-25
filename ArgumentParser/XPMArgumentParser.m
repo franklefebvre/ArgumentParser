@@ -109,10 +109,10 @@
 {
 	[signatures enumerateObjectsUsingBlock:^(XPMArgumentSignature * signature, BOOL *stop) {
 		[signature.switches enumerateObjectsUsingBlock:^(id _switch, BOOL *stop) {
-			[_switches setObject:signature forKey:_switch];
+            [self->_switches setObject:signature forKey:_switch];
 		}];
 		[signature.aliases enumerateObjectsUsingBlock:^(id alias, BOOL *stop) {
-			[_aliases setObject:signature forKey:alias];
+            [self->_aliases setObject:signature forKey:alias];
 		}];
 	}];
 }
@@ -131,9 +131,9 @@
 		NSRange rangeOfValues = [self rangeOfValuesStartingFromIndex:index+1 tryFor:valuedSignature.valuesPerInvocation];
 		NSIndexSet * indexSetOfValues = [NSIndexSet indexSetWithIndexesInRange:rangeOfValues];
 		[indexSetOfValues enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-			NSString * value = [_arguments objectAtIndex:idx];
-			[_arguments setBooleanValue:true ofAttribute:xpmargs_isValueCaptured forObjectAtIndex:idx];
-			[_package addObject:value toSignature:valuedSignature];
+            NSString * value = [self->_arguments objectAtIndex:idx];
+            [self->_arguments setBooleanValue:true ofAttribute:xpmargs_isValueCaptured forObjectAtIndex:idx];
+            [self->_package addObject:value toSignature:valuedSignature];
 		}];
 			
 	} else {
